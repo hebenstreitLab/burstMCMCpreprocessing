@@ -403,9 +403,9 @@ python3 processTrimmedBarcodes.py SRR11683995</code></pre>
 sequence reads are then aligned with bwa using the following command to
 generate corresponding sam files named “PREFFIX_2.sam”.</p>
 <pre eval="F," echo="T"><code>./bwaAligner.sh</code></pre>
-<p>The next command will associate the aligned reads with 10 &gt;= mapq
-score with their corresponding genes based on their overlap with exons
-on the same strand, generating “PREFFIX_readInfoByCell.pickle” and
+<p>The next command will associate the aligned reads with mapq score
+&gt;= 10 with their corresponding genes based on their overlap with
+exons on the same strand, generating “PREFFIX_readInfoByCell.pickle” and
 “PREFFIX_readInfoByGene.pickle” output files which contains information
 on the associated gene, cell ID, UMI, read sequence and genomic sequence
 (sequence in the fasta file at the aligned position) for each read,
@@ -449,7 +449,8 @@ for the inference algorithm only for selected genes, which are those
 with at least 1 T&gt;C conversion observed in both the control and 4sU
 data set, into a file called “qiuDataSelectedGenes.Rdata” using the
 following command, including UMI counts, T&gt;C counts, genomic T
-counts, background T&gt;C rate and 4sU-mediated T&gt;C rate.</p>
+counts, background T&gt;C rate and 4sU-mediated T&gt;C rate. This file
+is available on Zenodo ().</p>
 <pre eval="F," echo="T"><code>Rscript getSelectedGeneData.R</code></pre>
 <p>Cell-specific capture efficiencies for the cells in the Qiu 4sU data
 set were estimated using the following command despite Qiu et al 2020
@@ -461,7 +462,8 @@ embryonic stem cells”. Our script makes use of the files “ercc-info.txt”
 and “GSM1599501_K562_pure_RNA.csv” which can be downloaded from <a href="https://github.com/jingshuw/DESCEND_manuscript_source_code/tree/master/spike_in_analysis" class="uri">https://github.com/jingshuw/DESCEND_manuscript_source_code/tree/master/spike_in_analysis</a>
 and <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1599501" class="uri">https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1599501</a>,
 respectively, and generates a file called “qiuAlphas.Rdata” which
-contains the estimated capture efficiencies.</p>
+contains the estimated capture efficiencies. This file is available on
+Zenodo ().</p>
 <pre eval="F," echo="T"><code>Rscript ERCCanalysis.R</code></pre>
 </div>
 

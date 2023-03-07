@@ -13,7 +13,7 @@ from Bio import SeqIO
 #here we collapse UMIs belonging to the same gene and cell that have a hamming distance of 1 or less and record number of UMIs per cell per gene,
 #and then convert read information into the info required by the algorithm, which is to record the number of T>C conversions in the read and the number of Ts in the genomic sequence
 
-fileName = sys.argv[1] #'SRR11683995'
+fileName = sys.argv[1] 
 readInfoByCell = pickle.load(open(fileName + '_readInfoByCell.pickle', 'rb'))
 readInfoByGene = pickle.load(open(fileName + '_readInfoByGene.pickle', 'rb'))
 cells = list(readInfoByCell.keys())
@@ -32,7 +32,7 @@ for cell in cells:
     for gene in genes:
         geneReadIDs = set(readInfoByGene[gene].keys())
         # get overlap of reads found in both cell and gene
-        readIDs = list(geneReadIDs.intersection(cellReadIDs)) #[readID for readID in cellReadIDs if readID in geneReadIDs]
+        readIDs = list(geneReadIDs.intersection(cellReadIDs)) 
         if len(readIDs) > 0:
             readIDsByCellByGene[gene][cell] = readIDs
             UMIs = list(set([readInfoByCell[cell][readID][2] for readID in readIDs]))
@@ -41,7 +41,7 @@ for cell in cells:
 
 def hammingDistance(A, B): #A and B must be strings of the same length
     return sum(1 for a, b in zip(A, B) if a != b)
-    #return len([index for index in range(len(A)) if A[index] != B[index]])
+
 
 def collapseUMIs(UMIs, hammingDistance): #algorithm to optimally collapse UMIs, is to first find the row with most 1s in hamming matrix, then all UMIs 1 away from that are collapsed to it, then reform the hamming matrix and repeat until no 1s present in matrix
     hammingMatrix = numpy.array([[hammingDistance(UMI_A, UMI_B) for UMI_B in UMIs] for UMI_A in UMIs])

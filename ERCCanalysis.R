@@ -45,7 +45,7 @@ meanContentPerCell <- mean(cellTranscriptContent)
 
 kleinData <- list(alphas = alphas, cellContents = cellTranscriptContent)
 
-#then calculate the alphas in the qiu data, following my processing and analysis of the qiu datasets
+#then calculate the alphas in the qiu data, following the processing of the qiu datasets
 
 expectedTotalCellularMRNA <- mean(kleinData$cellContents)
 

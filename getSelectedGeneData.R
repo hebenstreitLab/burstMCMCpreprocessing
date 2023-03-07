@@ -7,6 +7,7 @@ UMIsPerGene <- sapply(UMIcounts, function(geneUMIs) {
 })
 qiuGenes <- names(UMIcounts)
 
+#get the T>C rates and CVs in the 4sU dataset
 conversionRates <- unlist(sapply(qiuGenes, function(gene, conversions, genomicTs) { #estimated underlying conversion rate
   return(sum(unlist(conversions[[gene]])) / sum(unlist(genomicTs[[gene]])))
 }, conversions, genomicTs))
@@ -21,8 +22,8 @@ conversionRateCoVs <- sapply(qiuGenes, function(gene, conversions, genomicTs, co
 }, conversions, genomicTs, conversionRates, USE.NAMES = F)
 names(conversionRateCoVs) <- qiuGenes
 
+#get the T>C rates and CVs in the control dataset
 #we have gene specific backgrounds for 12746 genes simply because any genes with 0 reads across all cells in the control data set were excluded
-#should actually have the exact number of observed T>Cs and genomic Ts in the control data set so we can only bother with genes where we have good confidence in the estimated background T>C rate by modelling the rate as a beta random variable
 geneSpecificBackgrounds <- read.table('geneSpecificBackgroundMutationRates.txt', header = F, stringsAsFactors = F)
 geneSpecificBackgroundEstimateCOVs <- sapply(1:nrow(geneSpecificBackgrounds), function(index) {
   alpha <- geneSpecificBackgrounds[index, 2]
@@ -74,7 +75,6 @@ p <- Ps[min(which(improbableGenes < 10))] #0.07547
 
 
 assumeAllNewmRNAsConversionProbabilities <- pbinom(conversionCountsPerGene - 1, genomicTCountsPerGene, p + geneSpecificBackgroundRates[genes], lower.tail = F, log.p = T)
-cdf <- sapply(seq(-10, -1, 0.01), function(x) {return(length(which(assumeAllNewmRNAsConversionProbabilities < x * log(10))))})
 
 
 genes <- qiuGenes[which(qiuGenes %in% names(geneSpecificBackgroundRates))]
@@ -89,9 +89,6 @@ genomicTCountsPerGene <- sapply(genes, function(gene, genomicTs) {
   return(sum(unlist(genomicTs[[gene]])))
 }, genomicTs)
 
-#get the genes which appear to have too low conversions observed in the 4sU data given gene specific background rates
-assumeAllNewmRNAsConversionProbabilities <- pbinom(conversionCountsPerGene - 1, genomicTCountsPerGene, p + geneSpecificBackgroundRates[genes], lower.tail = F, log.p = T)
-assumeAllOldmRNAsBackgroundProbabilities <- pbinom(conversionCountsPerGene, genomicTCountsPerGene, geneSpecificBackgroundRates[genes], log.p = T)
 
 genes <- qiuGenes[which(qiuGenes %in% names(geneSpecificBackgroundRates))]
 genes <- genes[which(conversionRates[genes] > 0 & geneSpecificBackgroundRates[genes] > 0)]

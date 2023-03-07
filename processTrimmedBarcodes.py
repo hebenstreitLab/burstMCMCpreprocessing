@@ -9,9 +9,8 @@ import sys
 import pickle
 
 #for detecting and repairing synthesis errors in the trimmed barcodes, then selecting cell barcodes as "real cells"
-#run from command line with python3 processTrimmedBarcodes.py SRR11683994 & and python3 processTrimmedBarcodes.py SRR11683995 &
 
-fileName = sys.argv[1] #'SRR11683994'
+fileName = sys.argv[1]
 print(fileName)
 filePath = fileName + '_1.trimmed.fastq'
 sequences = []

@@ -67,13 +67,13 @@ An R data structure called "qiuData.Rdata" is then generated from this using the
 Rscript txtToRdata.R
 ```
 
-We then infer the gene-invariant 4sU-mediated T>C rate (lambda_n) using all genes for which we have high enough confidence in their rates in both the control and 4sU data sets and finally save the data required for the inference algorithm only for selected genes, which are those with at least 1 T>C conversion observed in both the control and 4sU data set, into a file called "qiuDataSelectedGenes.Rdata" using the following command, including UMI counts, T>C counts, genomic T counts, background T>C rate and 4sU-mediated T>C rate. This file is available on Zenodo ().
+We then infer the gene-invariant 4sU-mediated T>C rate (lambda_n) using all genes for which we have high enough confidence in their rates in both the control and 4sU data sets and finally save the data required for the inference algorithm only for selected genes, which are those with at least 1 T>C conversion observed in both the control and 4sU data set, into a file called "qiuDataSelectedGenes.Rdata" using the following command, including UMI counts, T>C counts, genomic T counts, background T>C rate and 4sU-mediated T>C rate. This file is available on Zenodo (https://doi.org/10.5281/zenodo.7707970).
 
 ``` {eval=F, echo=T}
 Rscript getSelectedGeneData.R
 ```
 
-Cell-specific capture efficiencies for the cells in the Qiu 4sU data set were estimated using the following command despite Qiu et al 2020 not making use of spike-in probes. This was carried out in the manner descibed in the supplementary information section of our paper by using cell-matched Drop-seq data with spike-ins from a different paper entitled "Droplet barcoding for single cell transcriptomics applied to embryonic stem cells". Our script makes use of the files "ercc-info.txt" and "GSM1599501_K562_pure_RNA.csv" which can be downloaded from https://github.com/jingshuw/DESCEND_manuscript_source_code/tree/master/spike_in_analysis and https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1599501, respectively, and generates a file called "qiuAlphas.Rdata" which contains the estimated capture efficiencies. This file is available on Zenodo ().
+Cell-specific capture efficiencies for the cells in the Qiu 4sU data set were estimated using the following command despite Qiu et al 2020 not making use of spike-in probes. This was carried out in the manner descibed in the supplementary information section of our paper by using cell-matched Drop-seq data with spike-ins from a different paper entitled "Droplet barcoding for single cell transcriptomics applied to embryonic stem cells". Our script makes use of the files "ercc-info.txt" and "GSM1599501_K562_pure_RNA.csv" which can be downloaded from https://github.com/jingshuw/DESCEND_manuscript_source_code/tree/master/spike_in_analysis and https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1599501, respectively, and generates a file called "qiuAlphas.Rdata" which contains the estimated capture efficiencies. This file is available on Zenodo (https://doi.org/10.5281/zenodo.7707970).
 
 ``` {eval=F, echo=T}
 Rscript ERCCanalysis.R
